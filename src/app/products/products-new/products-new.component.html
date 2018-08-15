@@ -4,12 +4,12 @@
 <h3>New Product Creation</h3>
 <form action="">
     <label for="name">Name:</label>
-    <input type="text" id="name" #name>
+    <input type="text" id="name" #nameInput>
     <label for="description">Description:</label>
-    <input type="text" id="description" #description>
+    <input type="text" id="description" #descInput>
     <label for="price">Price:</label>
-    <input type="text" id="price" #price >
+    <input type="text" id="price" #priceInput >
     <label for="quantity">Quantity:</label>
-    <input type="text" id="quantity" #quantity>
-    <button class="btn btn-default" (click)="onClick(name, description, price)">Submit</button>
+    <input type="text" id="quantity" #quantityInput>
+    <button class="btn btn-default" (click)="onClick()">Submit</button>
 </form>

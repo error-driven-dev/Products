@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { Product } from '../product.model';
+import { ProductService } from '../products.service';
 
 @Component({
   selector: 'app-products-new',
@@ -7,17 +8,26 @@ import { Product } from '../product.model';
   styleUrls: ['./products-new.component.css']
 })
 export class ProductsNewComponent implements OnInit {
- @Output() productAdded = new EventEmitter<Product>();
-  constructor() { }
- newProduct: Product;
+  newProduct: Product;
+  @ViewChild('nameInput') nameInputRef: ElementRef;
+  @ViewChild('descInput') descriptionInputRef: ElementRef;
+  @ViewChild('priceInput') priceInputRef: ElementRef;
+  @ViewChild('quantityInput') quantityInputRef: ElementRef;
+  
+  
+  constructor(private productService: ProductService) { }
+  
   ngOnInit() {
-  }
- onClick(name, description, price, quantity){
-   this.newProduct.name = name;
-   this.newProduct.description = description;
-   this.newProduct.price = price;
-   this.newProduct.quantity = quantity;
-   this.productAdded.emit(this.newProduct);
 
+  }
+
+ onClick() {
+   const name = this.nameInputRef.nativeElement.value;
+   const description = this.descriptionInputRef.nativeElement.value;
+   const price = this.priceInputRef.nativeElement.value;
+   const quantity = this.quantityInputRef.nativeElement.value;
+   this.newProduct = new Product(name, description, price, quantity);
+   console.log(this.newProduct);
+   this.productService.addProduct(this.newProduct);
  }
 }
